@@ -3,32 +3,146 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#090909">
+<meta name="theme-color" content="#090a0b">
+<meta name="color-scheme" content="dark">
 <title>DTF Film Calculator</title>
 <style>
-*{box-sizing:border-box}html{overflow-x:hidden}body{margin:0;font-family:Arial,sans-serif;background:#0b0b0b;color:#f5f5f5;overflow-x:hidden}
-.wrap{max-width:1120px;margin:auto;padding:24px}.card{background:linear-gradient(145deg,#151515,#0f0f0f);border:1px solid #292929;border-radius:22px;padding:20px;margin-bottom:16px;box-shadow:0 12px 35px rgba(0,0,0,.22)}
-h1{margin:0 0 6px;font-size:28px}h2{font-size:18px}p{color:#aaa;margin-top:4px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-label{display:block;color:#aaa;font-size:13px;margin-bottom:6px}input{width:100%;padding:12px;border-radius:10px;border:1px solid #333;background:#0e0e0e;color:#fff;font-size:16px}
-.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}table{width:100%;border-collapse:collapse;margin-top:10px}th,td{padding:9px;border-bottom:1px solid #292929;text-align:center}th{color:#aaa;font-size:13px}
-button{border:0;border-radius:10px;padding:11px 16px;cursor:pointer;font-weight:700}.add{background:#252525;color:white;border:1px solid #333}.calc{background:#ef1717;color:#fff;font-size:16px;box-shadow:0 8px 22px rgba(239,23,23,.22)}.del{background:#351b1b;color:#ff8d8d;padding:7px 10px}
-.results{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.stat{background:#0b0b0b;border:1px solid #292929;border-radius:14px;padding:16px}.stat small{color:#888}.stat strong{display:block;font-size:24px;margin-top:5px}
-#layout{overflow:auto;background:#222;border-radius:14px;padding:14px}.film-title{font-weight:800;margin:8px 2px;color:#e3ff3b}.film{position:relative;background:#fff;margin:auto;box-shadow:0 12px 40px rgba(0,0,0,.45)}.item{position:absolute;background:#f1f1f1;border:1px solid #151515;border-radius:7px;color:#111;display:flex;align-items:center;justify-content:center;font-size:12px;text-align:center;overflow:hidden}.note{font-size:12px;color:#999}.group{min-width:72px}.separate{width:18px;height:18px}.empty{text-align:center;color:#777;padding:30px}.section-accent{height:3px;width:52px;background:#ef1717;border-radius:99px;margin:7px 0 14px}
-.brand{display:flex;align-items:center;gap:14px;margin-bottom:18px}.brand img{width:58px;height:58px;object-fit:cover;border-radius:17px;box-shadow:0 8px 28px rgba(0,0,0,.35)}.brand h1{font-size:26px;letter-spacing:.2px;margin:0}.brand span{display:block;color:#aaa;font-size:12px;margin-top:3px}.brand #langChange{margin-inline-start:auto;white-space:nowrap}
-.wrap{display:none}.lang-screen{min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(circle at 50% 0%,rgba(239,23,23,.18),transparent 38%),#090909}.lang-box{width:min(520px,100%);background:linear-gradient(145deg,#171717,#0d0d0d);border:1px solid #292929;border-radius:26px;padding:30px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)}.lang-logo{width:82px;height:82px;object-fit:cover;border-radius:22px;margin-bottom:16px;box-shadow:0 10px 35px rgba(0,0,0,.4)}.lang-title{font-size:28px;font-weight:800;margin:0 0 8px}.lang-sub{color:#999;margin:0 0 24px}.lang-buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.lang-btn{background:#151515;color:#fff;border:1px solid #333;padding:16px 10px;border-radius:15px;font-size:17px;font-weight:700;cursor:pointer}.lang-btn:hover{border-color:#ef1717;background:#1d1d1d}.lang-btn .native{display:block;font-size:12px;color:#999;margin-top:4px;font-weight:400}
-/* Phone + tablet responsive */
-@media(max-width:900px){.wrap{padding:18px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.results{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:700px){.wrap{padding:12px}.card{padding:14px;border-radius:18px;margin-bottom:12px}.brand{gap:10px;margin-bottom:12px}.brand img{width:46px;height:46px;border-radius:14px}.brand h1{font-size:20px}.brand span{font-size:10px}.brand #langChange{font-size:12px;padding:9px 10px}.grid{grid-template-columns:1fr 1fr;gap:9px}.card h2{font-size:16px}.results{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.stat{padding:12px}.stat strong{font-size:20px}.stat small{font-size:11px}.calc{width:100%;padding:14px}.add{padding:10px 12px}table{min-width:760px}#layout{padding:10px;-webkit-overflow-scrolling:touch}.film{max-width:none}}
-@media(max-width:520px){.lang-screen{padding:16px}.lang-box{padding:22px;border-radius:22px}.lang-logo{width:70px;height:70px;border-radius:18px}.lang-title{font-size:23px}.lang-sub{font-size:13px;margin-bottom:18px}.lang-buttons{grid-template-columns:1fr}.lang-btn{padding:14px}.grid{grid-template-columns:1fr}.results{grid-template-columns:1fr 1fr}.brand{flex-wrap:wrap}.brand>div{flex:1;min-width:0}.brand #langChange{margin-inline-start:0;width:100%}}
+:root{
+  --bg:#08090a;--panel:#101214;--panel2:#151719;--line:#272b2f;--muted:#8e959c;--text:#f5f7f8;
+  --red:#ef1717;--red2:#ff3434;--lime:#e3ff3b;--radius:20px;--shadow:0 20px 60px rgba(0,0,0,.32)
+}
+*{box-sizing:border-box}html{overflow-x:hidden;scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;overflow-x:hidden}
+button,input{font:inherit}button{cursor:pointer}input{outline:none}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 80% -10%,rgba(239,23,23,.12),transparent 30%),radial-gradient(circle at 10% 110%,rgba(227,255,59,.035),transparent 28%);z-index:-1}
+
+/* LANGUAGE GATE */
+.lang-screen{min-height:100svh;display:flex;align-items:center;justify-content:center;padding:22px;background:radial-gradient(circle at 50% 0,rgba(239,23,23,.2),transparent 42%),#08090a}
+.lang-box{width:min(500px,100%);padding:34px;border:1px solid #292d31;border-radius:28px;background:linear-gradient(145deg,#17191b,#0d0f10);box-shadow:var(--shadow);text-align:center;position:relative;overflow:hidden}
+.lang-box:after{content:"DTF";position:absolute;right:-18px;bottom:-38px;font-size:130px;font-weight:1000;color:rgba(255,255,255,.025);font-style:italic}
+.lang-logo{width:82px;height:82px;object-fit:cover;border-radius:23px;margin-bottom:18px;box-shadow:0 12px 35px rgba(0,0,0,.45)}
+.lang-title{font-size:30px;line-height:1.1;margin:0 0 8px;letter-spacing:-.8px}.lang-sub{color:var(--muted);margin:0 auto 26px;max-width:390px;line-height:1.6}
+.lang-buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.lang-btn{border:1px solid #303438;background:#121416;color:#fff;border-radius:16px;padding:16px 8px;font-weight:800;transition:.2s}.lang-btn:hover{border-color:var(--red);transform:translateY(-2px);background:#181a1c}.lang-btn .native{display:block;color:#777;font-size:11px;margin-top:4px;font-weight:500}
+
+/* APP SHELL */
+.wrap{display:none;max-width:1440px;margin:auto;padding:22px;position:relative}
+.brand{grid-area:brand;display:flex;align-items:center;gap:14px;padding:5px 2px 18px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:18px}
+.brand img{width:54px;height:54px;object-fit:cover;border-radius:17px;box-shadow:0 8px 25px rgba(0,0,0,.35)}
+.brand h1{font-size:23px;letter-spacing:-.4px;margin:0}.brand span{display:block;color:#858b91;font-size:12px;margin-top:3px}.brand #langChange{margin-inline-start:auto}
+
+.card{background:linear-gradient(150deg,rgba(21,23,25,.98),rgba(13,15,16,.98));border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:0 12px 35px rgba(0,0,0,.18)}
+.card h2{font-size:17px;letter-spacing:-.25px;margin:0 0 5px}.card p{color:#969da3;line-height:1.55}.section-accent{height:3px;width:46px;background:linear-gradient(90deg,var(--red),var(--red2));border-radius:99px;margin:10px 0 14px}
+
+/* DESKTOP LAYOUT: settings column + workspace */
+@media(min-width:901px){
+  .wrap{display:grid;grid-template-columns:330px minmax(0,1fr);grid-template-areas:"brand brand" "settings designs" "settings calc" "settings results" "settings layout";gap:0 18px;align-items:start}
+  .wrap>.card:nth-of-type(1){grid-area:settings;position:sticky;top:18px}
+  .wrap>.card:nth-of-type(2){grid-area:designs}.wrap>.card:nth-of-type(3){grid-area:calc}.wrap>.card:nth-of-type(4){grid-area:results}.wrap>.card:nth-of-type(5){grid-area:layout}
+  .wrap>.card{margin-bottom:18px}.brand{margin-bottom:0}
+  .brand #langChange{padding:9px 13px}
+  .settings-grid{display:grid;grid-template-columns:1fr;gap:13px}
+  .settings-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.settings-badge{font-size:10px;color:var(--lime);border:1px solid rgba(227,255,59,.22);padding:5px 8px;border-radius:99px;background:rgba(227,255,59,.05)}
+  .results{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .layout-card-head{display:flex;align-items:center;justify-content:space-between}.layout-card-head:after{content:"LIVE PREVIEW";font-size:10px;letter-spacing:1px;color:#6f767c;border:1px solid #303438;border-radius:99px;padding:5px 8px}
+}
+
+label{display:block;color:#92999f;font-size:11px;font-weight:700;margin:0 0 7px;letter-spacing:.15px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+input:not([type=checkbox]){width:100%;min-width:0;background:#0b0d0e;color:#fff;border:1px solid #303438;border-radius:12px;padding:12px 12px;font-size:15px;transition:.18s}input:not([type=checkbox]):focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(239,23,23,.11)}
+.note{font-size:11px;color:#737a80!important}.settings-note{margin:13px 0 0;padding:11px 12px;border:1px solid #25292c;border-radius:12px;background:#0d0f10}
+
+/* CUSTOM DESIGN TABLE */
+.table-scroll{overflow:auto;border:1px solid #282c30;border-radius:15px;background:#0b0d0e}table{width:100%;border-collapse:collapse;min-width:780px}th,td{padding:9px 8px;border-bottom:1px solid #202428;text-align:center}th{height:38px;color:#747b82;font-size:10px;text-transform:uppercase;letter-spacing:.5px;background:#0e1011}tbody tr:last-child td{border-bottom:0}tbody tr:hover{background:rgba(255,255,255,.018)}td:first-child{text-align:start;padding-inline-start:12px}td input:not([type=checkbox]){padding:9px 10px;border-radius:9px;font-size:13px}.name{font-weight:700}.group{max-width:95px}
+input[type=checkbox]{appearance:none;width:18px;height:18px;border:1px solid #4a4f54;border-radius:5px;background:#0c0e0f;vertical-align:middle;position:relative}input[type=checkbox]:checked{background:var(--red);border-color:var(--red)}input[type=checkbox]:checked:after{content:"✓";position:absolute;inset:0;display:grid;place-items:center;font-size:12px;font-weight:900;color:white}
+
+.add,.lang-btn{transition:.18s}.add{background:#15181a;color:#e9edf0;border:1px solid #34383c;border-radius:11px;padding:10px 14px;font-weight:800}.add:hover{border-color:#555b61;background:#1b1e20}.calc{width:100%;border:0;border-radius:13px;padding:15px 18px;background:linear-gradient(135deg,#f01919,#c90f0f);color:#fff;font-size:15px;font-weight:900;box-shadow:0 10px 28px rgba(239,23,23,.2);transition:.18s}.calc:hover{transform:translateY(-1px);filter:brightness(1.06)}.del{background:#241416;color:#ff8b8b;border:1px solid #442326;border-radius:8px;padding:7px 9px;font-size:11px;font-weight:800}
+
+/* RESULTS */
+.results{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}.stat{position:relative;overflow:hidden;background:#0b0d0e;border:1px solid #292d31;border-radius:14px;padding:14px}.stat:after{content:"";position:absolute;right:-20px;bottom:-25px;width:70px;height:70px;border-radius:50%;background:rgba(239,23,23,.05)}.stat small{color:#7d858b;font-size:10px}.stat strong{display:block;font-size:21px;line-height:1.1;margin-top:7px;letter-spacing:-.4px}.stat:first-child strong{color:var(--lime)}
+
+/* PREVIEW */
+#layout{overflow:auto;background:#080a0b;border:1px solid #252a2e;border-radius:16px;padding:18px;min-height:150px}.film-title{font-weight:900;margin:4px 2px 8px;color:var(--lime);font-size:11px;letter-spacing:.3px}.film{position:relative;background:#fff;margin:auto;box-shadow:0 20px 55px rgba(0,0,0,.5)}.item{position:absolute;background:#f2f2f2;border:1px solid #151515;border-radius:6px;color:#111;display:flex;align-items:center;justify-content:center;font-size:11px;text-align:center;overflow:hidden;font-weight:700}.empty{text-align:center;color:#666;padding:45px 20px;font-size:12px}
+
+/* MOBILE: purpose-built app UI */
+@media(max-width:900px){
+  .wrap{padding:13px;max-width:680px}.brand{padding:3px 2px 13px;margin-bottom:12px}.brand img{width:45px;height:45px;border-radius:14px}.brand h1{font-size:19px}.brand span{font-size:10px}.brand #langChange{font-size:11px;padding:8px 10px}
+  .card{border-radius:17px;padding:14px;margin-bottom:11px;box-shadow:0 9px 25px rgba(0,0,0,.16)}
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.settings-note{grid-column:1/-1}
+  .results{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.stat{padding:12px}.stat strong{font-size:18px}.stat small{font-size:9px}
+  .calc{position:relative}.table-scroll{margin-bottom:10px}
+  .card:nth-of-type(3){padding-bottom:13px}
+  #layout{padding:11px;border-radius:14px}
+}
+@media(max-width:520px){
+  body{padding-bottom:76px}.wrap{padding:10px}.brand{gap:9px}.brand img{width:40px;height:40px;border-radius:12px}.brand h1{font-size:17px}.brand span{font-size:9px}.brand #langChange{margin-inline-start:auto}
+  .card{padding:12px;border-radius:15px}.card h2{font-size:15px}.section-accent{margin:8px 0 12px}.grid{grid-template-columns:1fr 1fr}.grid>div:first-child{grid-column:1/-1}.settings-note{font-size:10px}
+  .results{grid-template-columns:1fr 1fr}.stat{padding:11px}.stat strong{font-size:17px}
+  .card:nth-of-type(3){background:transparent;border:0;padding:0;box-shadow:none}.card:nth-of-type(3) .calc{position:fixed;z-index:30;left:10px;right:10px;bottom:10px;width:calc(100% - 20px);height:54px;border-radius:15px;box-shadow:0 12px 30px rgba(0,0,0,.55),0 5px 20px rgba(239,23,23,.18)}
+  .lang-box{padding:24px 18px;border-radius:22px}.lang-logo{width:68px;height:68px}.lang-title{font-size:24px}.lang-buttons{grid-template-columns:1fr;gap:8px}.lang-btn{padding:14px}
+}
+@media(min-width:521px) and (max-width:900px){.card:nth-of-type(3){position:sticky;bottom:10px;z-index:20;background:rgba(16,18,20,.94);backdrop-filter:blur(14px)}}
+
+/* Desktop-only visual details */
+@media(min-width:901px){.wrap>.card:nth-of-type(1):before{content:"WORKSPACE / SETTINGS";display:block;color:#555c62;font-size:9px;letter-spacing:1.3px;margin-bottom:13px}.wrap>.card:nth-of-type(2):before{content:"01 / DESIGNS";display:block;color:#555c62;font-size:9px;letter-spacing:1.3px;margin-bottom:11px}.wrap>.card:nth-of-type(4):before{content:"02 / OUTPUT";display:block;color:#555c62;font-size:9px;letter-spacing:1.3px;margin-bottom:11px}.wrap>.card:nth-of-type(5):before{content:"03 / FILM MAP";display:block;color:#555c62;font-size:9px;letter-spacing:1.3px;margin-bottom:11px}}
+
+/* RTL/LTR polish */
+[dir="ltr"] .brand #langChange{margin-inline-start:auto}[dir="rtl"] .brand #langChange{margin-inline-start:auto}
 </style>
 </head>
 <body>
-<div id="langScreen" class="lang-screen"><div class="lang-box"><img class="lang-logo" src="logo.svg" alt="DTF logo"><h1 class="lang-title" id="langTitle">Choose your language</h1><p class="lang-sub" id="langSub">Select the language you want to use in DTF Film Calculator.</p><div class="lang-buttons"><button class="lang-btn" onclick="startApp('ar')">العربية<span class="native">Arabic</span></button><button class="lang-btn" onclick="startApp('fr')">Français<span class="native">French</span></button><button class="lang-btn" onclick="startApp('en')">English<span class="native">English</span></button></div></div></div>
-<div class="wrap"><div class="brand"><img src="logo.svg" alt="DTF logo"><div><h1 id="brandTitle">DTF Film Calculator</h1><span id="brandSub">Smart Film Packing • 58 cm</span></div><button class="add" id="langChange" onclick="showLanguageScreen()">Language</button></div>
-<div class="card"><h2 id="mainTitle">حاسبة استهلاك DTF Film</h2><div class="section-accent"></div><p id="intro">عرض الـ Film ثابت 58 cm، مع هامش 0.2 cm ومسافة 0.5 cm بين التصاميم.</p><div class="grid"><div><label id="filmWLabel">عرض الـ Film (cm)</label><input id="filmW" type="number" value="58" min="0.1" step="0.01" inputmode="decimal"></div><div><label id="gapLabel">المسافة بين التصاميم (cm)</label><input id="gap" type="number" value="0.5" min="0" step="0.01" inputmode="decimal"></div><div><label id="marginLabel">هامش الحدود من الجهات الأربع (cm)</label><input id="margin" type="number" value="0.2" min="0" step="0.01" inputmode="decimal"></div><p class="note" id="settingsNote">يمكن تغيير القيم في أي وقت، ثم اضغط «حساب وترتيب الـ Film» لتطبيقها.</p></div></div>
-<div class="card"><h2 id="designsTitle">التصاميم</h2><div class="table-scroll"><table><thead><tr><th id="thName">الاسم</th><th id="thWidth">العرض cm</th><th id="thHeight">الارتفاع cm</th><th id="thQty">الكمية</th><th id="thRotate">تدوير</th><th id="thGroup">المجموعة / Film</th><th id="thSeparate">منفصل</th><th id="thDelete"></th></tr></thead><tbody id="rows"></tbody></table></div><button class="add" id="addBtn" onclick="addRow()">+ إضافة تصميم</button></div>
-<div class="card"><button class="calc" id="calcBtn" onclick="calculate()">حساب وترتيب الـ Film</button></div>
-<div class="card"><h2 id="resultTitle">النتيجة</h2><div id="results" class="results"><div class="stat"><small id="lengthLabel">طول Film</small><strong id="length">—</strong></div><div class="stat"><small id="metersLabel">الاستهلاك بالمتر</small><strong id="meters">—</strong></div><div class="stat"><small id="areaLabel">المساحة m²</small><strong id="area">—</strong></div><div class="stat"><small id="countLabel">التصاميم</small><strong id="count">—</strong></div><div class="stat"><small id="filmsLabel">عدد الـFilm</small><strong id="films">—</strong></div></div><p id="detail" class="note"></p></div>
-<div class="card"><h2 id="layoutTitle">المخطط</h2><div id="layout"><div class="empty">أدخل المقاسات ثم اضغط حساب وترتيب الـ Film.</div></div></div></div>
+<div id="langScreen" class="lang-screen">
+  <div class="lang-box">
+    <img class="lang-logo" src="logo.svg" alt="DTF logo">
+    <h1 class="lang-title" id="langTitle">Choose your language</h1>
+    <p class="lang-sub" id="langSub">Select the language you want to use in DTF Film Calculator.</p>
+    <div class="lang-buttons">
+      <button class="lang-btn" onclick="startApp('ar')">العربية<span class="native">Arabic</span></button>
+      <button class="lang-btn" onclick="startApp('fr')">Français<span class="native">French</span></button>
+      <button class="lang-btn" onclick="startApp('en')">English<span class="native">English</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="brand">
+    <img src="logo.svg" alt="DTF logo">
+    <div><h1 id="brandTitle">DTF Film Calculator</h1><span id="brandSub">Smart Film Packing • 58 cm</span></div>
+    <button class="add" id="langChange" onclick="showLanguageScreen()">Language</button>
+  </div>
+
+  <div class="card">
+    <div class="settings-head"><h2>Film setup</h2><span class="settings-badge">58 CM READY</span></div>
+    <div class="grid settings-grid">
+      <div><label id="filmWLabel">عرض الـ Film (cm)</label><input id="filmW" type="number" value="58" min="0.1" step="0.01" inputmode="decimal"></div>
+      <div><label id="gapLabel">المسافة بين التصاميم (cm)</label><input id="gap" type="number" value="0.5" min="0" step="0.01" inputmode="decimal"></div>
+      <div><label id="marginLabel">هامش الحدود من الجهات الأربع (cm)</label><input id="margin" type="number" value="0.2" min="0" step="0.01" inputmode="decimal"></div>
+    </div>
+    <p class="note settings-note" id="settingsNote">يمكن تغيير القيم في أي وقت، ثم اضغط «حساب وترتيب الـ Film» لتطبيقها.</p>
+  </div>
+
+  <div class="card">
+    <h2 id="designsTitle">التصاميم</h2><div class="section-accent"></div>
+    <div class="table-scroll"><table><thead><tr><th id="thName">الاسم</th><th id="thWidth">العرض cm</th><th id="thHeight">الارتفاع cm</th><th id="thQty">الكمية</th><th id="thRotate">تدوير</th><th id="thGroup">المجموعة / Film</th><th id="thSeparate">منفصل</th><th id="thDelete"></th></tr></thead><tbody id="rows"></tbody></table></div>
+    <button class="add" id="addBtn" onclick="addRow()">+ إضافة تصميم</button>
+  </div>
+
+  <div class="card"><button class="calc" id="calcBtn" onclick="calculate()">حساب وترتيب الـ Film</button></div>
+
+  <div class="card">
+    <h2 id="resultTitle">النتيجة</h2><div class="section-accent"></div>
+    <div id="results" class="results">
+      <div class="stat"><small id="lengthLabel">طول Film</small><strong id="length">—</strong></div>
+      <div class="stat"><small id="metersLabel">الاستهلاك بالمتر</small><strong id="meters">—</strong></div>
+      <div class="stat"><small id="areaLabel">المساحة m²</small><strong id="area">—</strong></div>
+      <div class="stat"><small id="countLabel">التصاميم</small><strong id="count">—</strong></div>
+      <div class="stat"><small id="filmsLabel">عدد الـFilm</small><strong id="films">—</strong></div>
+    </div>
+    <p id="detail" class="note"></p>
+  </div>
+
+  <div class="card">
+    <div class="layout-card-head"><h2 id="layoutTitle">المخطط</h2></div>
+    <div id="layout"><div class="empty">أدخل المقاسات ثم اضغط حساب وترتيب الـ Film.</div></div>
+  </div>
+</div>
 <script src="app.js"></script>
-</body></html>
+</body>
+</html>
